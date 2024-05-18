@@ -1,25 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import supabase from '../../supabase';
 import './Admin.css';
+import Navbar from '../../components/Navbar/Navbar';
 
 const Admin = () => {
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
     const fetchAppointments = async () => {
-      try {
-        const { data: appointmentsData, error } = await supabase
-          .from('appointments')
-          .select('*')
-
-        if (error) {
-          throw new Error(error.message);
-        }
-
-        setAppointments(appointmentsData);
-      } catch (error) {
-        console.error(error);
-      }
+      setAppointments([
+        {
+          id: 1,
+          date: '01/10/2021',
+          services: [
+            { id: 1, time: '08:00', service: 'Corte' },
+            { id: 2, time: '09:00', service: 'Barba' },
+          ],
+        },
+        {
+          id: 2,
+          date: '02/10/2021',
+          services: [
+            { id: 3, time: '08:00', service: 'Barba' },
+            { id: 4, time: '09:00', service: 'Corte' },
+          ],
+        },
+        {
+          id: 3,
+          date: '03/10/2021',
+          services: [
+            { id: 5, time: '08:00', service: 'Barba' },
+            { id: 6, time: '09:00', service: 'Barba' },
+          ],
+        },
+      ]);
     };
 
     fetchAppointments();
@@ -27,15 +40,16 @@ const Admin = () => {
 
   return (
     <div>
+      <Navbar />
       <h1>Admin Page</h1>
       <div className="calendar-grid">
         {appointments.map((day) => (
           <div key={day.id} className="calendar-day">
             <h2>{day.date}</h2>
             <ul>
-              {day.appointments.map((appointment) => (
+              {day.services?.map((appointment) => (
                 <li key={appointment.id}>
-                  <span>{appointment.time}</span>
+                  <span>{appointment.time} </span>
                   <span>{appointment.service}</span>
                 </li>
               ))}
