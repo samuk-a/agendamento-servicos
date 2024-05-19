@@ -1,8 +1,6 @@
-import React from 'react';
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
-
 
 const RegistrationForm = ({
   onChange,
@@ -28,7 +26,7 @@ const RegistrationForm = ({
 
           <DatePicker
             selected={fields['hour'] || ''}
-            onChange={(date) => onChange('hour', date)}
+            onChange={(date: any) => onChange('hour', date)}
             showTimeSelect
             showTimeSelectOnly
             timeIntervals={30}
@@ -49,7 +47,7 @@ const RegistrationForm = ({
           <DatePicker
             dateFormat="dd/MM/yyyy"
             selected={fields['date'] || ''}
-            onChange={(date) => onChange('date', date)}
+            onChange={(date: any) => onChange('date', date)}
           />
         </div>
       </label>

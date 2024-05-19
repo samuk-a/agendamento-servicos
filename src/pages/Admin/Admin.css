@@ -1,9 +1,7 @@
 /* Estilos gerais */
 .calendar-grid {
   display: flex;
-  /* flex-wrap: wrap; */
   justify-content: center;
-  /* align-items: flex-start; */
 }
 
 /* Estilos para os dias da semana */

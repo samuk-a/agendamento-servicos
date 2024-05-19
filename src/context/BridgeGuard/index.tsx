@@ -35,9 +35,9 @@ export const BridgeGuardProvider = ({ children }: { children: ReactNode }) => {
     handleSubmit
   }
 
-  // Authenticated logic
-  // When the user reload the screee it should call the token in the local storage to check if the user is authenticated
-  // Will be called only once
+  // Authenticated logic.
+  // When the user reload the screen it should call the token in the local storage to check if the user is authenticated.
+  // Will be called only once.
   useEffect(() => {
     const isAuthenticatedLocal = localStorage.getItem('isAuthenticated')
 
