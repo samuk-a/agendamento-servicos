@@ -1,9 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Admin.css';
-import Navbar from '../../components/Navbar/Navbar';
+
+interface Appointment {
+  id: number;
+  date: string;
+  services: {
+    id: number;
+    time: string;
+    service: string;
+  }[];
+}
 
 const Admin = () => {
-  const [appointments, setAppointments] = useState([]);
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
 
   useEffect(() => {
     const fetchAppointments = async () => {
@@ -32,15 +41,14 @@ const Admin = () => {
             { id: 6, time: '09:00', service: 'Barba' },
           ],
         },
-      ]);
-    };
+      ])
+    }
 
     fetchAppointments();
   }, []);
 
   return (
     <div>
-      <Navbar />
       <h1>Admin Page</h1>
       <div className="calendar-grid">
         {appointments.map((day) => (

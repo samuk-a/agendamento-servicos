@@ -1,31 +1,29 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Login.css';
-import Navbar from '../../components/Navbar/Navbar';
+import { BridgeGuardContext } from '../../context/BridgeGuard';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
+  const {
+    handleSubmit
+  } = useContext(BridgeGuardContext)
 
-  const handlePasswordChange = (e) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value)
+  }
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Lógica de autenticação aqui
-  };
+  }
 
   return (
     <div>
-      <Navbar />
-      <div className="container">
+      <div className="container max-w-md">
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
-        <div className="form-group">
+          <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
               type="email"
