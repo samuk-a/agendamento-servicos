@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './Admin.css';
+import { TempStateContext } from '../../context/TempStateContenxt';
+import TableDate from '../../components/TableDate';
 
 interface Appointment {
   id: number;
@@ -13,6 +15,8 @@ interface Appointment {
 
 const Admin = () => {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
+
+  const context = useContext(TempStateContext)
 
   useEffect(() => {
     const fetchAppointments = async () => {
@@ -50,21 +54,10 @@ const Admin = () => {
   return (
     <div>
       <h1>Admin Page</h1>
-      <div className="calendar-grid">
-        {appointments.map((day) => (
-          <div key={day.id} className="calendar-day">
-            <h2>{day.date}</h2>
-            <ul>
-              {day.services?.map((appointment) => (
-                <li key={appointment.id}>
-                  <span>{appointment.time} </span>
-                  <span>{appointment.service}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
+
+      <TableDate
+        values={context.fields}
+      />
     </div>
   );
 };

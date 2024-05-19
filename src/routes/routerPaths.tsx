@@ -8,13 +8,18 @@ import Admin from "../pages/Admin/Admin";
 import Login from "../pages/Login/Login";
 import Signup from "../pages/Login/Signup";
 import AvailableTime from "../pages/Admin/AvailableTime";
+import Home from "../pages/index/Home";
 
 const routerPaths = createBrowserRouter([
   {
     element: <App />,
-    path: "/",
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: "/",
+        element: <Home />,
+        errorElement: <ErrorPage />,
+      },
       {
         path: "/admin",
         element: <Admin />,
