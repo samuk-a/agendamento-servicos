@@ -8,7 +8,7 @@ import Admin from "../pages/Admin/Admin";
 import Login from "../pages/Login/Login";
 import Signup from "../pages/Login/Signup";
 import AvailableTime from "../pages/Admin/AvailableTime";
-import Home from "../pages/index/Home";
+import Home from "../pages/Home";
 
 const routerPaths = createBrowserRouter([
   {
