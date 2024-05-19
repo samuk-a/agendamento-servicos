@@ -7,7 +7,11 @@ npm install
 npm run dev
 ```
 
-##
+## Local enviroment in the root of the project create a ***.env*** and add the following (cahnging the credntials with your own)
+```
+SUPABASE_URL=https://<your_supabase_url>
+SUPABASE_KEY=<your_supabase_key>
+```
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
