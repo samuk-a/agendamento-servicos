@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './Login.css';
-import Navbar from '../../components/Navbar/Navbar';
 
 const Signup = () => {
   const [name, setName] = useState('');
@@ -8,31 +7,31 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [isProfessional, setIsProfessional] = useState(false);
 
-  const handleNameChange = (e) => {
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
-  const handlePasswordChange = (e) => {
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
 
-  const handleIsProfessionalChange = (e) => {
+  const handleIsProfessionalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsProfessional(e.target.checked);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Add your logic here to handle form submission
+
+    console.log(name, email, password, isProfessional)
   };
 
   return (
     <div>
-      <Navbar />
-      <div className="container">
+      <div className="container max-w-md">
         <form className="form" onSubmit={handleSubmit}>
           <h2>Cadastro</h2>
           <div className="form-group">
@@ -63,13 +62,15 @@ const Signup = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="isProfessional">Prestador de serviços?</label>
-            <input
-              type="checkbox"
-              id="isProfessional"
-              checked={isProfessional}
-              onChange={handleIsProfessionalChange}
-            />
+            <label htmlFor="isProfessional" className='flex items-center whitespace-nowrap hover:cursor-pointer'>Prestador de serviços?
+              <input
+                type="checkbox"
+                id="isProfessional"
+                checked={isProfessional}
+                className='w-fit ml-3 hover:cursor-pointer'
+                onChange={handleIsProfessionalChange}
+              />
+            </label>
           </div>
           <button type="submit">Cadastro</button>
         </form>

@@ -34,22 +34,6 @@ input {
   border-radius: 4px;
 }
 
-button {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  font-weight: 500;
-  color: #fff;
-  background-color: #2196f3;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #1976d2;
-}
-
 /* Estilos do link de recuperação de senha */
 .forgot-password {
   font-size: 14px;
