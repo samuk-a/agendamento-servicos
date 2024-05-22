@@ -8,7 +8,6 @@ function App() {
     <div>
       <Navbar />
 
-
       <TempStateContextProvider>
         <Outlet />
       </TempStateContextProvider>

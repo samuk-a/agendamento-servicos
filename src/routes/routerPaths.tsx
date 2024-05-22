@@ -5,10 +5,11 @@ import {
 import App from '../pages/index/App';
 import ErrorPage from "../pages/Errors/default";
 import Admin from "../pages/Admin/Admin";
-import Login from "../pages/Login/Login";
-import Signup from "../pages/Login/Signup";
-import AvailableTime from "../pages/Admin/AvailableTime";
+import Login from "../pages/Login";
+import Signup from "../pages/Signup";
+import AvailableTime from "../pages/AvailableTime";
 import Home from "../pages/Home";
+import WorkType from "../pages/WorkType";
 
 const routerPaths = createBrowserRouter([
   {
@@ -28,6 +29,11 @@ const routerPaths = createBrowserRouter([
       {
         path: "/availableTime",
         element: <AvailableTime />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/workType",
+        element: <WorkType />,
         errorElement: <ErrorPage />,
       },
       {

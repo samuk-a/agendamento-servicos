@@ -1,22 +1,18 @@
-import React, { useContext, useState } from 'react';
+import { useContext } from 'react';
 import './Login.css';
 import { BridgeGuardContext } from '../../context/BridgeGuard';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   const {
-    handleSubmit
+    handleSubmit,
+    email,
+    password,
+    handleEmailChange,
+    handlePasswordChange,
+    error,
+    isDisabled
   } = useContext(BridgeGuardContext)
-
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
-  }
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  }
 
   return (
     <div>
@@ -41,7 +37,11 @@ const Login = () => {
               onChange={handlePasswordChange}
             />
           </div>
-          <button type="submit">Login</button>
+          {
+            error && <div className="text-red-700 py-3 font-bold text-sm">{error}</div>
+          }
+
+          <button disabled={isDisabled} type="submit">Login</button>
         </form>
         <a href="/signup">Não tem uma conta? Cadastre-se</a>
       </div>
