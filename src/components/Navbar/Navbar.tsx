@@ -16,7 +16,8 @@ function Navbar() {
       <nav>
         <ul>
           <li><Link to="/">Início</Link></li>
-          {isToShow && <li><Link to={"/availableTime"} >Cadastrar</Link></li>}
+          {isToShow && <li><Link to={"/availableTime"} >Cadastrar Horario</Link></li>}
+          {isToShow && <li><Link to={"/workType"} >Cadastrar Tipo trabalho</Link></li>}
           {isToShow && <li><Link to="/admin" >Usuário</Link></li>}
 
           {isToShow && <li><button className="p-0" onClick={handleLougout}>Logout</button></li>}

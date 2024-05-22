@@ -1,63 +1,72 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Admin.css';
-import { TempStateContext } from '../../context/TempStateContenxt';
-import TableDate from '../../components/TableDate';
+import api from '../../services/api';
 
-interface Appointment {
-  id: number;
-  date: string;
-  services: {
-    id: number;
-    time: string;
-    service: string;
-  }[];
+export interface UsersProps {
+  id: number
+  name: string
+  email: string
+  isProvider: boolean
 }
 
 const Admin = () => {
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
-
-  const context = useContext(TempStateContext)
+  const [users, setUsers] = useState<UsersProps[]>([]);
 
   useEffect(() => {
-    const fetchAppointments = async () => {
-      setAppointments([
-        {
-          id: 1,
-          date: '01/10/2021',
-          services: [
-            { id: 1, time: '08:00', service: 'Corte' },
-            { id: 2, time: '09:00', service: 'Barba' },
-          ],
-        },
-        {
-          id: 2,
-          date: '02/10/2021',
-          services: [
-            { id: 3, time: '08:00', service: 'Barba' },
-            { id: 4, time: '09:00', service: 'Corte' },
-          ],
-        },
-        {
-          id: 3,
-          date: '03/10/2021',
-          services: [
-            { id: 5, time: '08:00', service: 'Barba' },
-            { id: 6, time: '09:00', service: 'Barba' },
-          ],
-        },
-      ])
+    const fetchUsers = async () => {
+      try {
+        const resp = await api.get<UsersProps[]>('/users')
+        setUsers(resp.data)
+
+      } catch (error) {
+        console.log(error)
+      }
     }
 
-    fetchAppointments();
+    fetchUsers();
   }, []);
 
   return (
     <div>
       <h1>Admin Page</h1>
 
-      <TableDate
-        values={context.fields}
-      />
+      <section className='flex flex-col justify-center items-center my-4 p-8 border border-gray-500'>
+        <span className="text-2xl font-bold">Available Users</span>
+
+        <table>
+          <thead className='border border-gray-400'>
+            <tr>
+              <th className='border border-gray-400 p-4'>ID</th>
+              <th className='border border-gray-400 p-4'>Name</th>
+              <th className='border border-gray-400 p-4'>Email</th>
+              <th className='border border-gray-400 p-4'>Is Provider</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {users?.length > 0 && users?.map((element) => (
+              <tr key={element?.id}>
+                <td className='border border-gray-400 p-4'>
+                  {element?.id}
+                </td>
+                <td className='border border-gray-400 p-4'>
+                  {element?.name}
+                </td>
+                <td className='border border-gray-400 p-4'>
+                  {element?.email}
+                </td>
+                <td className='border border-gray-400 p-4'>
+                  {element?.isProvider ? 'Yes' : 'No'}
+                </td>
+
+                {/* {<td className='border border-gray-400 p-4'>
+                  <button onClick={() => onRemove(index)} className='bg-red-500 text-white p-2 rounded-md hover:bg-red-700'>Remove</button>
+                </td>} */}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
     </div>
   );
 };

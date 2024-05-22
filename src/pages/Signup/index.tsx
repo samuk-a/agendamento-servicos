@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import './Login.css';
+import './Signup.css';
+import api from '../../services/api';
 
 const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isProfessional, setIsProfessional] = useState(false);
+  const [isProvider, setIsProvider] = useState(false);
+  const [error, setError] = useState('');
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -19,14 +21,26 @@ const Signup = () => {
     setPassword(e.target.value);
   };
 
-  const handleIsProfessionalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsProfessional(e.target.checked);
+  const handleIsProviderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsProvider(e.target.checked);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    try {
+      setError('');
+      const res = await api.post('/createUser', { name, email, password, isProvider })
 
-    console.log(name, email, password, isProfessional)
+      if (res?.data?.error) {
+        setError(`${res.data.error} - Email already in use.`);
+        return;
+      } else {
+        window.location.href = '/login';
+      }
+    } catch (error) {
+      setError(error?.response?.data?.message);
+      console.log(error)
+    }
   };
 
   return (
@@ -65,13 +79,17 @@ const Signup = () => {
             <label htmlFor="isProfessional" className='flex items-center whitespace-nowrap hover:cursor-pointer'>Prestador de serviços?
               <input
                 type="checkbox"
-                id="isProfessional"
-                checked={isProfessional}
+                id="isProvider"
+                checked={isProvider}
                 className='w-fit ml-3 hover:cursor-pointer'
-                onChange={handleIsProfessionalChange}
+                onChange={handleIsProviderChange}
               />
             </label>
           </div>
+          {
+            error && <div className="text-red-700 py-3 font-bold text-sm">{error}</div>
+          }
+
           <button type="submit">Cadastro</button>
         </form>
       </div>
