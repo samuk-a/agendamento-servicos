@@ -14,7 +14,7 @@ interface Appointment {
 }
 
 const Admin = () => {
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const [, setAppointments] = useState<Appointment[]>([]);
 
   const context = useContext(TempStateContext)
 
